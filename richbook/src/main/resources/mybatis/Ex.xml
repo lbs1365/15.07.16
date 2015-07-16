@@ -11,13 +11,30 @@
 		<result property="exEtc" column="exEtc" />
 		<result property="memNo" column="memNo" />
 	</resultMap>
-	<select id="ExList" parameterType="Ex" resultMap="ExResult">
+		<select id="ExList" parameterType="Ex" resultMap="ExResult">
 		select * from extable
 		<where>
     		<if test="exListPrintCal == 'null'"> 
-    			memNo = #{memNo} </if>
-    		<if test="exListPrintCal != 'null'"> 
-    			<![CDATA[ memNo = #{memNo} and exDate >= #{exListPrintCal} ]]> </if>
+    			memNo = #{memNo} 
+    		    <if test="exListPrint == 'YearMonth'">
+    		    	<if test="exYearMonth_month == 0"> 
+	    				and exDate between #{exYearMonth_year}||'-01-01' and #{exYearMonth_year}||'-12-31'
+	    			</if>
+	    			<if test="exYearMonth_month != 0"> 
+	    				and exDate between #{exYearMonth_year}||'-'||#{exMonth}||'-01' 
+						and #{exYearMonth_year}||'-'||#{exMonth}||'-'||#{exDay}
+	    			</if>
+	    		</if>	    		
+    		</if>
+    		<if test="exListPrintCal != 'null'">
+    			<![CDATA[ memNo = #{memNo} and exDate >= #{exListPrintCal} ]]>    		
+    		</if>
+    		<if test="exSearchCho == 'emtName'">
+    			and emtNo = #{exSearchChoNum}
+    		</if>
+    		<if test="exSearchCho == 'exCon'">
+    			and exCon = #{exSearch}
+    		</if>
     	</where>
 			<if test="exSort==null || exSort=='exDate'">				
 				<if test="exArr==null || exArr=='Desc'">
@@ -51,16 +68,28 @@
 					order by exCon
 				</if> 
 			</if>						
-	</select>	
+	</select>
+	<select id="ExYearMonth_year" parameterType="Ex" resultType="int">		
+		select count(exDate) from extable where memNo = #{memNo} 
+			and exDate between #{exYear}||'-01-01' and #{exYear}||'-12-31'
+	</select>
+	<select id="ExYearMonth_month" parameterType="Ex" resultType="int">		
+		select count(exDate) from extable where memNo = #{memNo} 
+			and exDate between #{exYearMonth_year}||'-'||#{exMonth}||'-01' 
+				and #{exYearMonth_year}||'-'||#{exMonth}||'-'||#{exDay}
+	</select>
 	<insert id="ExInsert" parameterType="Ex">
 	<selectKey order="BEFORE" keyProperty="exNo" resultType="int">
   		select nvl(max(exNo),0)+1 exNo from extable
   	</selectKey>
-		insert into extable values (#{exNo},#{emtNo},#{exDate},#{exSum},#{exCon},#{exEtc},1)
+		insert into extable values (#{exNo},#{emtNo},#{exDate},#{exSum},#{exCon},#{exEtc},#{memNo})
 	</insert>
 	<delete id="ExDel" parameterType="int">
 		delete from extable where exNo=#{exNo}
 	</delete>
+	<delete id="exmemdel" parameterType="int">
+  		delete from extable where memNo=#{memNo}
+  	</delete>
 	<!-- <select id="detail" parameterType="int" resultType="Member">
 		select * from emp where empno = #{empno}
 	</select>

@@ -9,4 +9,5 @@ public interface ExMetDao {
 	int emtUp (ExMet emt);
 	ExMet emtChk (ExMet emt);
 	void emtDel(int emtNo);
+	void memdel(int memNo);
 }

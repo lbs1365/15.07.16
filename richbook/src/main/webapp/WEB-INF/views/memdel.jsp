@@ -5,8 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+h2{
+		font-size: 24px; 
+		border-bottom: 1px solid; 
+		border-left: 10px solid #000;
+		padding: 0px 0px 5px 10px; 
+		margin: 5px 0px 10px 0px;
+	
+	}
+</style>
 </head>
 <body>
-로긴
+<h2>정상적으로 탈퇴되었습니다.</h2>
+<a href="main.do">메인화면으로 이동하기</a>
 </body>
 </html>

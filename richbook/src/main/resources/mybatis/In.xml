@@ -82,11 +82,14 @@
 	<selectKey order="BEFORE" keyProperty="inNo" resultType="int">
   		select nvl(max(inNo),0)+1 inNo from intable
   	</selectKey>
-		insert into intable values (#{inNo},#{imtNo},#{inDate},#{inSum},#{inCon},#{inEtc},1)
+		insert into intable values (#{inNo},#{imtNo},#{inDate},#{inSum},#{inCon},#{inEtc},#{memNo})
 	</insert>
 	<delete id="InDel" parameterType="int">
 		delete from intable where inNo=#{inNo}
 	</delete>
+	<delete id="inmemdel" parameterType="int">
+  		delete from intable where memNo=#{memNo}
+  	</delete>
 	<!-- <select id="detail" parameterType="int" resultType="Member">
 		select * from emp where empno = #{empno}
 	</select>

@@ -5,7 +5,7 @@ public class In {
 	private int inNo;
 	private int imtNo;
 	private String inDate;
-	private long inSum;
+	private int inSum;
 	private String inCon;
 	private String inEtc;
 	private int memNo;
@@ -44,10 +44,10 @@ public class In {
 	public void setInDate(String inDate) {
 		this.inDate = inDate;
 	}
-	public long getInSum() {
+	public int getInSum() {
 		return inSum;
 	}
-	public void setInSum(long inSum) {
+	public void setInSum(int inSum) {
 		this.inSum = inSum;
 	}
 	public String getInCon() {

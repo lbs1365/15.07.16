@@ -28,4 +28,7 @@ public class InServiceImpl implements InService{
 	public int inYearMonth_month (In in) {
 		return ind.inYearMonth_month(in);
 	}
+	public void memdel(int memNo) {
+		ind.memdel(memNo);
+	}
 }

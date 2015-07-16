@@ -3,19 +3,24 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import model.In;
 import model.InMet;
+import model.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import service.CalService;
 import service.InMetService;
 import service.InService;
 
 @Controller
+@SessionAttributes("userid")
 public class InContoller {	
 	@Autowired
 	InService ins;
@@ -24,8 +29,9 @@ public class InContoller {
 	@Autowired
 	CalService cs;
 	@RequestMapping(value="In")
-	public String inList(In in, Model model){
-		in.setMemNo(1);
+	public String inList(In in, Model model,HttpSession session){
+		Member userid = (Member) session.getAttribute("userid");
+		in.setMemNo(userid.getMemNo());
 		if(in.getInListPrint()==null || in.getInListPrint().equals("") || in.getInListPrint().equals("All")){
 			in.setInListPrintCal("null");
 			in.setInYearMonth_year(0);
@@ -102,29 +108,40 @@ public class InContoller {
 			in.setInSearchCho(null);
 		}else if(in.getInSearchCho().equals("imtName")){
 			InMet imtchk = new InMet();
-			imtchk.setMemNo(1);
+			imtchk.setMemNo(userid.getMemNo());
 			imtchk.setImtName(in.getInSearch());
 			imtchk = imts.imtChk(imtchk);
-			in.setInSearchChoNum(imtchk.getImtNo());			
+			if(imtchk==null){
+				in.setInSearchChoNum(0);
+			}else{
+				in.setInSearchChoNum(imtchk.getImtNo());
+			}
+						
 		}
 		List<In> inlist = ins.inList(in);
-		List<InMet> imtlist = imts.imtList(in.getMemNo());
+		List<InMet> imtlist = imts.imtList(userid.getMemNo());
 		model.addAttribute("in",in);
+		model.addAttribute("ho","ho");
 		model.addAttribute("inlist",inlist);
 		model.addAttribute("imtlist",imtlist);
-		return "in";		
+		
+//		return "forward:Chart.do";		
+//		return "index1";		
+		return "boot";		
 	}
 	@RequestMapping(value="InInsert")
-	public String inInsert(In in, Model model){		
-		in.setMemNo(1);
+	public String inInsert(In in, Model model,HttpSession session){	
+		Member userid = (Member) session.getAttribute("userid");
+		in.setMemNo(userid.getMemNo());
 		ins.inInsert(in);
 		return "redirect:In.do";
 	}
 	@RequestMapping(value="ImtUpList")
-	public String imtUpList(Model model){		
-		int memNo = 1;		
-		List<InMet> imtlist = imts.imtList(memNo);
+	public String imtUpList(Model model,HttpSession session){	
+		Member userid = (Member) session.getAttribute("userid");
+		List<InMet> imtlist = imts.imtList(userid.getMemNo());
 		model.addAttribute("imtlist",imtlist);
+		model.addAttribute("memno",userid.getMemNo());
 		return "imtUpList";
 	}
 	@RequestMapping(value="ImtUp")
@@ -150,4 +167,6 @@ public class InContoller {
 		imts.imtDel(imtNo);
 		return "forward:ImtUpList.do";
 	}
+	
+	
 }

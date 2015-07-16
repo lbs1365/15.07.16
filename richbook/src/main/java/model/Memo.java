@@ -5,7 +5,14 @@ public class Memo {
 	private String regdate;
 	private String content;
 	private String memoDate;
+	private int memNo;
 	
+	public int getMemNo() {
+		return memNo;
+	}
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
 	public int getMemoNo() {
 		return MemoNo;
 	}

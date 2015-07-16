@@ -8,20 +8,23 @@
 		<result property="regdate" column="regdate" />
 		<result property="content" column="content" />
 		<result property="memoDate" column="memoDate" />
+		<result property="memNo" column="memNo" />
 	</resultMap>
 	<select id="MemoList" resultMap="MemoResult">
-		select * from Memo order by MemoNo
+		select * from Memo where memNo = #{memNo} order by MemoNo
 	</select>
 	
 	<insert id="MemoInsert" parameterType="Memo">
 	<selectKey order="BEFORE" keyProperty="MemoNo" resultType="int">
   		select nvl(max(MemoNo),0)+1 MemoNo from Memo
   	</selectKey>
-		insert into Memo values (#{MemoNo},  to_char(sysdate,'YYYY-MM-DD'), #{content}, #{memoDate})
+		insert into Memo values (#{MemoNo},  
+		to_char(sysdate,'YYYY-MM-DD'), #{content}, #{memoDate},#{memNo})
 	</insert>
-	
-	
 	<delete id="MemoDel" parameterType="int">
 		delete from Memo where memoNo=#{memoNo}
 	</delete>
+	<delete id="memomemdel" parameterType="int">
+  		delete from Memo where memNo=#{memNo}
+  	</delete>
 </mapper>

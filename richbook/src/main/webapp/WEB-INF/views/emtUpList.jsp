@@ -38,7 +38,7 @@ ${msg }
 	<tr>
 		<td>${emtlist.size()+1 }</td>
 		<td>
-			<input type="hidden" name="memNo" value="1">
+			<input type="hidden" name="memNo" value="${memno}">
 			<input type="text" name="emtName" required="required">
 		</td>
 		<td colspan="2"><input type="submit" value="추가"></td>

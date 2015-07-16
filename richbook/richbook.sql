@@ -4,11 +4,13 @@ create table member (
 	name varchar2(20),
 	birth Date,
 	job varchar2(20),
-	gen varchar2(20)
+	gen varchar2(20),
+	memNo number	
 );
 select * from member;
+delete from member where memNo=;
 drop table member;
-
+select * from intable;
 create table intable (
 	inNo number primary key,
 	imtNo number,
@@ -52,7 +54,9 @@ create table memo(
 	MemoNo number primary key,
 	regdate varchar2(20),
 	content varchar2(4000),
-	memoDate varchar2(20)
+	memoDate varchar2(20),
+	memNo number
+	
 );
 
 select * from memo;

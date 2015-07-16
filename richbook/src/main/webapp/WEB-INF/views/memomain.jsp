@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>memo</title>
-<script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript">
 	function openContent() {
 		$('.mw_layer').addClass('open');
@@ -16,6 +15,9 @@
 		location.href = "#layer";
 
 	}
+	$(function(){
+		    $("#input").button(); 
+	});
 
 	jQuery(function($) {
 
@@ -45,85 +47,26 @@
 			layerWindow.removeClass('open');
 
 			return false;
-
+		
+			
 		});
 
 	});
 </script>
 
-<style type="text/css">
-table, td, th {
-	border: 1px solid green;
-}
-
-th {
-	background-color: green;
-	color: white;
-}
-
-html, body {
-	height: 100%;
-	margin: 0
-}
-
-.mw_layer {
-	display: none;
-	position: fixed;
-	_position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 10000;
-	width: 100%;
-	height: 100%
-}
-
-.mw_layer.open {
-	display: block
-}
-
-.mw_layer .bg {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: #000;
-	opacity: .5;
-	filter: alpha(opacity = 50)
-}
-
-#layer {
-	position: absolute;
-	top: 40%;
-	left: 40%;
-	width: 400px;
-	height: 180px;
-	margin: -150px 0 0 -194px;
-	padding: 28px 28px 0 28px;
-	border: 2px solid #555;
-	background: #fff;
-	font-size: 12px;
-	font-family: Tahoma, Geneva, sans-serif;
-	color: #767676;
-	line-height: normal;
-	white-space: normal
-}
-</style>
 </head>
-<body>
-	<fieldset>
-	<legend>MEMO</legend>
-	TODAY:${nowDate }
-	<table border="1">
+<body id="body">
+	TODAY:${nowDate } &nbsp;&nbsp;&nbsp; <button onclick="openContent()" id="">작성</button>
+	<p>
+	<table id="memolist" style="height: 150px; width: 450px;">
 		<c:forEach items="${MemoList }" var="MemoList">
 			<tr>
-				<td>
+				<td id="memotd">
 				<!-- 오늘과 기한날을 비교해서 색으로 표현  -->
 				<font 
-				<c:if test="${nowDate > MemoList.memoDate }"> color="red"</c:if>
-				<c:if test="${nowDate <= MemoList.memoDate }"> color="blue"</c:if>
+					<c:if test="${nowDate > MemoList.memoDate }"> color="red"</c:if>
+					<c:if test="${nowDate <= MemoList.memoDate }"> color="blue"</c:if>
 				>
-				
 			
 					 ${MemoList.content }<font size="2">(${MemoList.regdate })</font>
 					 </font>
@@ -142,14 +85,14 @@ html, body {
 	</table>
 
 
-
+		
 		<div class="mw_layer">
 			<div class="bg"></div>
 			<div id="layer">
 				<!-- 이 사이에 작성을 하면 팝업의 내용이 들어간다.  -->
 
 				<form action="MemoInsert.do">
-					<table>
+					<table style="height: 100%; width: 100%;">
 						<tr>
 							<th colspan="2">입력</th>
 						</tr>
@@ -169,7 +112,6 @@ html, body {
 			</div>
 		</div>
 		<!-- <a href="#layer" onclick="openContent()">aaaa</a> -->
-		<button onclick="openContent()">작성</button>
-	</fieldset>
+		
 </body>
 </html>

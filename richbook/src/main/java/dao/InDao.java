@@ -10,4 +10,5 @@ public interface InDao {
 	void inDel (int inNo);
 	int inYearMonth_year (In in);
 	int inYearMonth_month (In in);
+	void memdel(int memNo);
 }

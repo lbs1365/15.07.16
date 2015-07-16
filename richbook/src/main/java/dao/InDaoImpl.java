@@ -27,4 +27,7 @@ public class InDaoImpl implements InDao{
 	public int inYearMonth_month(In in) {
 		return session.selectOne("InYearMonth_month", in);
 	}
+	public void memdel(int memNo) {
+		session.delete("inmemdel", memNo);
+	}
 }

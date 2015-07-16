@@ -6,23 +6,30 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
+import model.Member;
 import model.Memo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import service.MemoService;
 
 @Controller
+@SessionAttributes("userid")
 public class MemoController {
 	@Autowired
 	MemoService memos;
+	
 	@RequestMapping(value="MemoList")	//value값은 .do가 연결되어 있음 주소
-	public String MemoList(Memo memo, Model model) {//주소집
-		
-		List<Memo> memoList = memos.MemoList();
+	public String MemoList(Memo memo, Model model, HttpSession session) {//주소집
+		Member userid = (Member) session.getAttribute("userid");
+		memo.setMemNo(userid.getMemNo());
+		List<Memo> memoList = memos.MemoList(userid.getMemNo());
 		model.addAttribute("MemoList",memoList);
 		
 		//비교할 현재 날짜 보내기
@@ -30,13 +37,13 @@ public class MemoController {
 		Date currentTime = new Date();
 		String nowDate =DateFormat.format(currentTime);
 		model.addAttribute("nowDate",nowDate);
-		
-		return "memomain";//집에서 내보냄
+		model.addAttribute("memo","memo");
+		return "forward:datelist.do";//집에서 내보냄
 	}
 	@RequestMapping(value="MemoInsert")
-	public String MemoInsert(String memoDate,String content,Memo memo , Model model){
-		Calendar today = Calendar.getInstance();
-		
+	public String MemoInsert(String memoDate,String content,Memo memo , Model model,HttpSession session){
+		Member userid = (Member) session.getAttribute("userid");
+		memo.setMemNo(userid.getMemNo());
 		memo.setContent(content);
 		memo.setMemoDate(memoDate);
 		memos.MemoInsert(memo);
@@ -50,5 +57,4 @@ public class MemoController {
 		
 		return "redirect:MemoList.do";
 	}
-	
 }

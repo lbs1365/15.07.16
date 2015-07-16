@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+#containers {
+	width: 1150px;
+	height: 700px;
+	border: 1px solid #bcbcbc;
+	overflow: auto;
+}
+tr:HOVER{
+	background-color: #FF77AA;
+}
+#content{
+	width: 1050px;
+	height: 690px;
+/* 	height: 707px; */
+	padding-bottom: 0px;
+	margin: 20px ;
+	overflow: auto;
+	border: 1px solid #bcbcbc;
+}
+
+#menu {
+	width: 1040px;
+	height: 50px;
+	padding: 10px auto;
+	margin: 20px auto;
+	background-color: #DEDEDE;
+	border: 1px solid #bcbcbc;
+	
+}
+
+#calender {
+	width: 500px;
+	height: 450px;
+	padding: 0px;
+	margin-left: 0px;
+	float: left;
+	clear: both;
+	border: 1px solid #bcbcbc;
+}
+#calender table{
+	width: 100%;
+	height: 100%;
+}
+
+#chart {
+	width: 500px;
+	height: 400px;
+	padding: 0px;
+	margin-right: 0px;
+	float: right;
+	clear: right;
+	border: 1px solid #bcbcbc;
+}
+
+#memo {
+	width: 500px;
+	height: 150px;
+	margin: 20px;
+	padding: 10px;
+	float: left;
+	clear: both;
+	border: 1px solid #bcbcbc;
+}
+
+#fix {
+	width: 300px;
+	height: 170px;
+	margin-right: 20px;
+	padding: 10px;
+	float: right;
+	clear: right;
+	border: 1px solid #bcbcbc;
+}

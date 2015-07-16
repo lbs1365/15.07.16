@@ -11,29 +11,23 @@ import model.ExMet;
 public class ExMetServiceImpl implements ExMetService{
 	
 	@Autowired
-	ExMetDao exd;
-	
+	ExMetDao exmd;
 	public List<ExMet> emtList(int memNo) {
 		
-		return exd.emtList(memNo);
+		return exmd.emtList(memNo);
 	}
-
-	
 	public int emtUp(ExMet emt) {
-		
-		return exd.emtUp(emt);
+		return exmd.emtUp(emt);
 	}
-
-	
 	public ExMet emtChk(ExMet emt) {
 		
-		return exd.emtChk(emt);
+		return exmd.emtChk(emt);
 	}
-
-	
 	public void emtDel(int emtNo) {
-		exd.emtDel(emtNo);
-		
+		exmd.emtDel(emtNo);
+	}
+	public void memdel(int memNo) {
+		exmd.memdel(memNo);
 	}
 }
 

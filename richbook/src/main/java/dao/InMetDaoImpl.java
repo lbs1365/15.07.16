@@ -23,5 +23,7 @@ public class InMetDaoImpl implements InMetDao{
 	public void imtDel(int imtNo) {		
 		session.delete("ImtDel", imtNo);
 	}
-
+	public void memdel(int memNo) {
+		session.delete("inmmemdel", memNo);
+	}
 }

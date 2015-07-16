@@ -10,6 +10,7 @@
     <result property="birth" column="birth"/>
     <result property="job" column="job"/>
     <result property="gen" column="gen"/>    
+    <result property="memNo" column="memNo"/>    
   </resultMap>
    <!-- <select id="listAll" parameterType="Member" resultMap="MemberResult">
     select * from emp
@@ -28,9 +29,15 @@
   	 select * from member where id = #{id} 
   </select>
   <insert id="insert" parameterType="Member">
+  	<selectKey order="BEFORE" keyProperty="memNo" resultType="int">
+  		select nvl(max(memNo),0)+1 memNo from member
+  	</selectKey>
 	 insert into member values (#{id},#{pw},#{name},#{birth},
-	    #{job},#{gen})
+	    #{job},#{gen},#{memNo})
   </insert>
+  <delete id="memdel" parameterType="int">
+  	delete from member where memNo=#{memNo}
+  </delete>
   <!-- <update id="update" parameterType="Member">
 	 update emp set ename=#{ename},job=#{job},mgr=#{mgr},
 	    <if test="hiredate!=''">hiredate=#{hiredate},</if>

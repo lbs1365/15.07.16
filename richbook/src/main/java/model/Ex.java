@@ -13,9 +13,72 @@ public class Ex {
 	private String exSort;
 	private String exListPrint;	
 	private String exListPrintCal;
+	private String exDay;
+	private int exYearMonth_year;
+	private int exYearMonth_month;
+	
+	private String exSearch;
+	private String exSearchCho;
+	private int exSearchChoNum;
 	
 	
-	
+	private String exYearMonth;
+	private int exYear;
+	private String exMonth;
+	public String getExYearMonth() {
+		return exYearMonth;
+	}
+	public void setExYearMonth(String exYearMonth) {
+		this.exYearMonth = exYearMonth;
+	}
+	public int getExYear() {
+		return exYear;
+	}
+	public void setExYear(int exYear) {
+		this.exYear = exYear;
+	}
+	public String getExMonth() {
+		return exMonth;
+	}
+	public void setExMonth(String exMonth) {
+		this.exMonth = exMonth;
+	}
+	public String getExDay() {
+		return exDay;
+	}
+	public void setExDay(String exDay) {
+		this.exDay = exDay;
+	}
+	public int getExYearMonth_year() {
+		return exYearMonth_year;
+	}
+	public void setExYearMonth_year(int exYearMonth_year) {
+		this.exYearMonth_year = exYearMonth_year;
+	}
+	public int getExYearMonth_month() {
+		return exYearMonth_month;
+	}
+	public void setExYearMonth_month(int exYearMonth_month) {
+		this.exYearMonth_month = exYearMonth_month;
+	}
+	public String getExSearch() {
+		return exSearch;
+	}
+	public void setExSearch(String exSearch) {
+		this.exSearch = exSearch;
+	}
+	public String getExSearchCho() {
+		return exSearchCho;
+	}
+	public void setExSearchCho(String exSearchCho) {
+		this.exSearchCho = exSearchCho;
+	}
+	public int getExSearchChoNum() {
+		return exSearchChoNum;
+	}
+	public void setExSearchChoNum(int exSearchChoNum) {
+		this.exSearchChoNum = exSearchChoNum;
+	}
 	
 	public String getExArr() {
 		return exArr;

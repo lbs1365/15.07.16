@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="path.jsp" %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<%=path %>/resources/css/table.css" rel="stylesheet">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script type="text/javascript">
 	$(function(){
@@ -140,8 +142,8 @@
 </script>
 </head>
 <body>
-	<h2>수입</h2>
-	<a href="#"	onclick="window.open('ImtUpList.do','분류 추가','width=800,height=800')">분류 추가</a><br>
+	<a class="listAtag" href="#" onclick="window.open('ImtUpList.do','분류 추가','width=300,height=500,left=250,top=150')"
+	>분류 추가</a><br><br>
 	<input type="radio" name="inListPrint" value="All" 
 		<c:if test="${in.inListPrint == null || in.inListPrint.equals('All')}">
 		checked="checked"</c:if>>전체
@@ -174,85 +176,88 @@
 			</c:forEach>
 		</select>
 	</c:if>		
+	<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<select id="inSearchCho">
-		<option value="imtName" 
-			<c:if test="${in.inSearchCho.equals('imtName')}"> selected="selected"</c:if>
-		>분류</option>		
-		<option value="inCon"
-			<c:if test="${in.inSearchCho.equals('inCon')}"> selected="selected"</c:if>
-		>내역</option>
-	</select>
-	<input type="search" id="inSearch" value="${in.inSearch}">					
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+	<div id="searchdiv">
+		<select id="inSearchCho">
+			<option value="imtName" 
+				<c:if test="${in.inSearchCho.equals('imtName')}"> selected="selected"</c:if>
+			>분류</option>		
+			<option value="inCon"
+				<c:if test="${in.inSearchCho.equals('inCon')}"> selected="selected"</c:if>
+			>내역</option>
+		</select>
+		<input type="search" id="inSearch" value="${in.inSearch}" required="required">					
+	</div><br><br>
 	<form action="InInsert.do" method="post">
-		<table border="1">
+		<table border="1" id="insert">
 			<tr>
-				<th>No</th>				
+				<th><div align="center">No</div></th>			
 				<c:if test="${in.inSort == null || in.inSort.equals('inDate')}">
 					<th>
 						<c:if test="${in.inArr == null}">
-							<div class="inDate" id="Asc">날짜 ▼</div>
+							<div class="inDate" id="Asc" align="center">날짜 ▼</div>
 						</c:if>
 						<c:if test="${in.inArr.equals('Desc')}">
-							<div class="inDate" id="Asc">날짜 ▼</div>
+							<div class="inDate" id="Asc" align="center">날짜 ▼</div>
 						</c:if>
 						<c:if test="${in.inArr.equals('Asc')}">
-							<div class="inDate" id="Desc">날짜 ▲</div>
+							<div class="inDate" id="Desc" align="center">날짜 ▲</div>
 						</c:if>						
 					</th>
-					<th><div class="imtNo" id="Desc">분류</div></th>
-					<th><div class="inSum" id="Desc">금액</div></th>
-					<th><div class="inCon" id="Desc">내역</div></th>			
+					<th><div class="imtNo" id="Desc" align="center">분류</div></th>
+					<th><div class="inSum" id="Desc" align="center">금액</div></th>
+					<th><div class="inCon" id="Desc" align="center">내역</div></th>			
 				</c:if>								
 				<c:if test="${in.inSort.equals('imtNo')}">
-					<th><div class="inDate" id="Desc">날짜</div></th>
+					<th><div class="inDate" id="Desc" align="center">날짜</div></th>
 					<th>
 						<c:if test="${in.inArr.equals('Desc')}">
-							<div class="imtNo" id="Asc">분류 ▼</div>
+							<div class="imtNo" id="Asc" align="center">분류 ▼</div>
 						</c:if>
 						<c:if test="${in.inArr.equals('Asc')}">
-							<div class="imtNo" id="Desc">분류 ▲</div>
+							<div class="imtNo" id="Desc" align="center">분류 ▲</div>
 						</c:if>
 					</th>
-					<th><div class="inSum" id="Desc">금액</div></th>
-					<th><div class="inCon" id="Desc">내역</div></th>			
+					<th><div class="inSum" id="Desc" align="center">금액</div></th>
+					<th><div class="inCon" id="Desc" align="center">내역</div></th>			
 				</c:if>
 				<c:if test="${in.inSort.equals('inSum')}">
-					<th><div class="inDate" id="Desc">날짜</div></th>	
-					<th><div class="imtNo" id="Desc">분류</div></th>		
+					<th><div class="inDate" id="Desc" align="center">날짜</div></th>	
+					<th><div class="imtNo" id="Desc" align="center">분류</div></th>		
 					<th>
 						<c:if test="${in.inArr.equals('Desc')}">
-							<div class="inSum" id="Asc">금액 ▼</div>
+							<div class="inSum" id="Asc" align="center">금액 ▼</div>
 						</c:if>
 						<c:if test="${in.inArr.equals('Asc')}">
-							<div class="inSum" id="Desc">금액 ▲</div>
+							<div class="inSum" id="Desc" align="center">금액 ▲</div>
 						</c:if>
 					</th>
 					<th><div class="inCon" id="Desc">내역</div></th>
 				</c:if>
 				<c:if test="${in.inSort.equals('inCon')}">
-					<th><div class="inDate" id="Desc">날짜</div></th>
-					<th><div class="imtNo" id="Desc">분류</div></th>
-					<th><div class="inSum" id="Desc">금액</div></th>
+					<th><div class="inDate" id="Desc" align="center">날짜</div></th>
+					<th><div class="imtNo" id="Desc" align="center">분류</div></th>
+					<th><div class="inSum" id="Desc" align="center">금액</div></th>
 					<th>
 						<c:if test="${in.inArr.equals('Desc')}">
-							<div class="inCon" id="Asc">내역 ▼</div>
+							<div class="inCon" id="Asc" align="center">내역 ▼</div>
 						</c:if>
 						<c:if test="${in.inArr.equals('Asc')}">
-							<div class="inCon" id="Desc">내역 ▲</div>
+							<div class="inCon" id="Desc" align="center">내역 ▲</div>
 						</c:if>
 					</th>
 				</c:if>
-				<th>기타</th>				
-				<th>추가&삭제</th>
+				<th><div align="center">기타</div></th>				
+				<th><div align="center">추가&삭제</div></th>
 			</tr>
 			<tr>
 				<td>입력</td>
-				<td><input type="date" name="inDate" required="required"></td>
-				<td><select name="imtNo">
+				<td><input type="date" name="inDate" required="required" id="datenum"></td>
+				<td><select name="imtNo" required="required" id="imtNo" >
+							<option value="" disabled selected>분류추가 해주세요.</option>
 						<c:forEach var="imtlist" items="${imtlist }">
 							<option value="${imtlist.imtNo }">${imtlist.imtName }</option>
 						</c:forEach>

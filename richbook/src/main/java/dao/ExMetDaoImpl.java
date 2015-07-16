@@ -24,6 +24,8 @@ public class ExMetDaoImpl implements ExMetDao{
 	public void emtDel(int emtNo) {
 		session.delete("EmtDel", emtNo);
 	}
-
+	public void memdel(int memNo) {
+		session.delete("exmmemdel", memNo);
+	}
 
 }

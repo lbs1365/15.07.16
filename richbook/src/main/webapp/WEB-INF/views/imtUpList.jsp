@@ -20,7 +20,10 @@
 </head>
 <body>
 <h2>분류 설정</h2>
-${msg }
+<font color="red">
+	${msg }
+
+</font>
 <form action="ImtUp.do" method="post">
 <table border="1">
 	<tr>
@@ -38,7 +41,7 @@ ${msg }
 	<tr>
 		<td>${imtlist.size()+1 }</td>
 		<td>
-			<input type="hidden" name="memNo" value="1">
+			<input type="hidden" name="memNo" value="${memno }">
 			<input type="text" name="imtName" required="required">
 		</td>
 		<td colspan="2"><input type="submit" value="추가"></td>

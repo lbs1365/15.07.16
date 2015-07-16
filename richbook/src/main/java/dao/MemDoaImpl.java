@@ -9,10 +9,13 @@ public class MemDoaImpl implements MemDao{
 	@Autowired
 	private SqlSession session;
 	public int insert(Member mem) {			
-			return session.insert("insert",mem);		
+		return session.insert("insert",mem);		
 	}
 	public Member login(String id) {
 		return session.selectOne("login", id);
+	}
+	public void memdel(int memNo) {
+		session.delete("memdel", memNo);
 	}
 }
 

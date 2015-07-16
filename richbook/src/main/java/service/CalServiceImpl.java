@@ -12,6 +12,7 @@ public class CalServiceImpl implements CalService{
 	int calDay;
 	int lastcalDay;
 	int inListPrintCal;
+	int exListPrintCal;
 	public String inListPrintCal(String inListPrint){
 		Calendar cal = Calendar.getInstance();
 		day = cal.get(Calendar.DATE);
@@ -235,6 +236,14 @@ public class CalServiceImpl implements CalService{
 		}
 		String exListPrintCal = year +"-"+ month +"-"+ lastcalDay;
 		return exListPrintCal;		
+	}
+	
+	public int exYearMonthListPrintCal(String YearMonth) {
+		
+		Calendar cal = Calendar.getInstance();
+		year = cal.get(Calendar.YEAR);
+		exListPrintCal = year;
+		return exListPrintCal;
 	}
 	
 }

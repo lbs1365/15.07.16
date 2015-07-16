@@ -23,4 +23,7 @@
 	<delete id="EmtDel" parameterType="int">
 		delete from exmet where emtNo=#{emtNo}
 	</delete>
+	<delete id="exmmemdel" parameterType="int">
+  		delete from exmet where memNo=#{memNo}
+  	</delete>
 </mapper>

@@ -9,4 +9,5 @@ public interface InMetDao {
 	int imtUp (InMet imt);
 	InMet imtChk (InMet imt);
 	void imtDel(int imtNo);
+	void memdel(int memNo);
 }

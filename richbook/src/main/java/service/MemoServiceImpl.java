@@ -11,8 +11,8 @@ import model.Memo;
 public class MemoServiceImpl implements MemoService{
 	@Autowired
 	MemoDao Memod;
-	public List<Memo> MemoList() {
-		return Memod.MemoList();
+	public List<Memo> MemoList(int memNo) {
+		return Memod.MemoList(memNo);
 	}
 
 	public void MemoInsert(Memo memo) {
@@ -22,5 +22,7 @@ public class MemoServiceImpl implements MemoService{
 	public void MemoDel(int MemoNo) {
 		Memod.MemoDel(MemoNo);
 	}
-
+	public void memdel(int memNo) {
+		Memod.memdel(memNo);
+	}
 }

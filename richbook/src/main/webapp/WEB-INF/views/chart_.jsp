@@ -8,15 +8,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>통계창</title>
-<script src="<%=path %>/resources/js/jquery.js" type="text/javascript"></script>
+<%-- <script src="<%=path %>/resources/js/jquery.js" type="text/javascript"></script> --%>
 <%-- <link rel="stylesheet" href="<%=path %>/resources/mediagroove.css"> --%>
 
-<script src="<%=path %>/resources/js/jquery.bpopup.min.js"></script>
+<%-- <script src="<%=path %>/resources/js/jquery.bpopup.min.js"></script>
 <script src="<%=path %>/resources/js/jquery-ui.min.js" type="text/javascript"></script>
 
 <script src="<%=path %>/resources/js/highcharts.js"></script>
 <script src="<%=path %>/resources/js/highcharts-3d.js"></script>
-<script src="<%=path %>/resources/js/exporting.js"></script>
+<script src="<%=path %>/resources/js/exporting.js"></script> --%>
+
 </head>
 <style type="text/css">
 .popup-div {
@@ -55,9 +56,13 @@
 	<input type="button" value="${exlist.exSum }" >
 
 </c:forEach> --%>
- 	<input type="hidden" value="${indate }" id="indate"> 
+ 	<input type="hidden" value="${indaylist}" id="indate"> 
+ 	<input type="hidden" value="${exdaylist}" id="exdate"> 
+	<input type="hidden" value="${insal}" id="sal"> 
+<%--  	<input type="hidden" value="${indate }" id="indate"> 
  	<input type="hidden" value="${exdate }" id="exdate"> 
-	<input type="hidden" value="${insal }" id="sal"> 
+	<input type="hidden" value="${insal }" id="sal">  --%>
+	
 <script type="text/javascript">
 	/* function ch(){
 		$.each($('.ho,.hoo'), function(index) { 
@@ -84,7 +89,20 @@
 		var exlist= new Array();
 		var exlist2= new Array();
 		
-		<c:forEach items="${inlist }" var="inlist">
+		<c:forEach items="${insumlist }" var="insumlist">
+			inlist.push("${insumlist}");
+		</c:forEach>
+		for ( var i = 0; i < inlist.length; i++) {
+// 		    alert(typeof list[i]);
+			inlist2.push(parseInt(inlist[i]));
+		}
+		<c:forEach items="${exsumlist }" var="exsumlist">
+			exlist.push("${exsumlist}");
+		</c:forEach>
+		for ( var i = 0; i < exlist.length; i++) {
+			exlist2.push(parseInt(exlist[i]));
+		}
+/* 		<c:forEach items="${inlist }" var="inlist">
 			inlist.push("${inlist.inSum}");
 		</c:forEach>
 		for ( var i = 0; i < inlist.length; i++) {
@@ -97,7 +115,7 @@
 		for ( var i = 0; i < exlist.length; i++) {
 // 		    alert(typeof list[i]);
 			exlist2.push(parseInt(exlist[i]));
-		}
+		} */
 		
 // 		alert(typeof list2);
 //  		alert(inlist2);
@@ -107,7 +125,7 @@
 	            type: 'line'
 	        },
 	        title: {
-	            text: '일단 수입 차트'
+	            text: '이번 달 사용'
 	        },
 	        subtitle: {
 	            text: 'test버전'
@@ -116,7 +134,6 @@
 	            categories: 
 // 	            		indate.split(',')
 						[]
-	            		
 	        }, // 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 	        yAxis: { //y 축
 	            title: {
@@ -132,10 +149,10 @@
 	            }
 	        },
 	        series: [{
-	            name: '수입'+indate.split(','),
+	            name: '수입'+indate,
 				data: inlist2          
 	        },{
-	        	name: '지출'+exdate.split(','),
+	        	name: '지출'+exdate,
 				data: exlist2
 	        }]
 	    });
@@ -145,7 +162,7 @@
 </script>
 
 <body onload="chart()">
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto" > ㅎㅇ?</div>
+<div id="container" style="min-width: 310px; height: 400px;" ></div>
 
 <%-- <c:set value="0" var="i"/>
 <c:forEach var="indates" items="${indate }" >

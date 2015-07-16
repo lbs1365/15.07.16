@@ -23,5 +23,7 @@ public class InMetServiceImpl implements InMetService{
 	public void imtDel(int imtNo) {
 		imd.imtDel(imtNo);
 	}
-
+	public void memdel(int memNo) {
+		imd.memdel(memNo);
+	}
 }

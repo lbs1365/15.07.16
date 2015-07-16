@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+@font-face {
+  font-family: 'Nanum Gothic Coding';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Gothic Coding';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Bold.eot);
+  src: url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Bold.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Bold.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Bold.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/nanumgothiccoding/v4/NanumGothicCoding-Bold.ttf) format('truetype');
+}
+	#topMenu {
+           width: 1040px;
+		   height: 50px;
+    }
+    #topMenu ul {           /* 메인 메뉴 안의 ul을 설정함: 상위메뉴의 ul+하위 메뉴의 ul */
+        list-style-type: none;  /* 메인 메뉴 안의 ul 내부의 목록 표시를 없애줌 */
+        margin: 0px;            /* 메인 메뉴 안의 ul의 margin을 없앰 */
+        padding: 0px;           /* 메인 메뉴 안의 ul의 padding을 없앰 */
+    }
+    #topMenu ul li {            /* 메인 메뉴 안에 ul 태그 안에 있는 li 태그의 스타일 적용(상위/하위메뉴 모두) */
+        background-color: #F6F6F6;  /* 배경 색을 RGB(2D2D2D)로 설정 */
+        float: left;                /* 왼쪽으로 나열되도록 설정 */
+        line-height: 49px;          /* 텍스트 한 줄의 높이를 30px로 설정 */
+        vertical-align: middle;     /* 세로 정렬을 가운데로 설정 */
+        text-align: center;         /* 텍스트를 가운데로 정렬 */
+        position: relative;         /* 해당 li 태그 내부의 top/left 포지션 초기화 */
+    }
+    #idset{
+		float: right;
+		background-color: #F6F6F6; 
+		line-height: 40px;         
+        vertical-align: middle;    
+        text-align: center;        
+        position: relative;  
+        font-size: 18px;
+        color: #0073EA;
+        font-family: 'Nanum Gothic Coding'; 
+        margin: 5px;
+    }
+    .menuLink {           /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
+        text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
+        display: block;                     /* a 태그의 클릭 범위를 넓힘 */
+        width: 120px;                       /* 기본 넓이를 150px로 설정 */
+        font-size: 18px;                    /* 폰트 사이즈를 12px로 설정 */
+        font-family: 'Nanum Gothic Coding'; /* 기본 폰트를 영어/한글 순서대로 설정 */
+   		color: #0073EA;
+    }
+    .topMenuLi:hover .menuLink {    /* 상위 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
+        background-color: #0073EA;  /* 배경색을 밝은 회색으로 설정 */
+   		color : white;
+/*    		#FF77AA; */
+    }

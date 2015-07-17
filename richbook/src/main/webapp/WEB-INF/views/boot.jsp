@@ -32,9 +32,23 @@
 		    return;
 		}
 	}
+	function inexcel(){
+		if (confirm("수입차트를 출력 하시겠습니까?") == true){    //확인
+			inform.submit();
+		}else{   //취소
+		    return;
+		}
+	}
+	function exexcel(){
+		if (confirm("지출차트를 출력 하시겠습니까?") == true){    //확인
+			exform.submit();
+		}else{   //취소
+		    return;
+		}
+	}
+	
 </script>
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -52,18 +66,17 @@
                     <li>
                         <a href="#">통계</a>
                     </li>
+					<li><form action="InExcel.do" name="inform">
+						<a href="#" id="aid" onclick="inexcel()">수입출력</a></form></li>
+                    <li>
+					<li><form action="ExExcel.do" name="exform">
+						<a href="#" id="aid" onclick="exexcel()">지출출력</a></form></li>
                     <li>
 						<form action="logout.do" name="outform">
 						<a href="#" onclick="logout_event()" id="aid"
 						>${userid.getId()}님 환영합니다~</a>
 						</form>
 					</li>
-					<li><a></a></li>
-					<li><a></a></li>
-					<li><a></a></li>
-					<li><a></a></li>
-					<li><a></a></li>
-					<li><a></a></li>
 					<li><a></a></li>
 					<li><a></a></li>
 					<li><a></a></li>
@@ -121,6 +134,9 @@
                <jsp:include page="memomain.jsp"  />
             </div>
              <div class="col-md-6 portfolio-item" id="fix">
+				<h2>Fix</h2>
+            </div>
+              <div class="col-md-6 portfolio-item" id="fix"  style="">
 				<h2>Fix</h2>
             </div>
         </div>

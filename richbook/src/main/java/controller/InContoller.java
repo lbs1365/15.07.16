@@ -3,12 +3,16 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.In;
 import model.InMet;
 import model.Member;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,6 +124,7 @@ public class InContoller {
 		}
 		List<In> inlist = ins.inList(in);
 		List<InMet> imtlist = imts.imtList(userid.getMemNo());
+		
 		model.addAttribute("in",in);
 		model.addAttribute("ho","ho");
 		model.addAttribute("inlist",inlist);
@@ -167,6 +172,35 @@ public class InContoller {
 		imts.imtDel(imtNo);
 		return "forward:ImtUpList.do";
 	}
-	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value="InExcel")
+	public String InExcel(In in, Model model,HttpSession session, HSSFWorkbook workbook,HttpServletResponse response){
+		Member userid = (Member) session.getAttribute("userid");
+		in.setMemNo(userid.getMemNo());
+		if(in.getInListPrint()==null || in.getInListPrint().equals("") || in.getInListPrint().equals("All")){
+			in.setInListPrintCal("null");
+		}else{
+			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
+		}
+		  // create a new Excel sheet
+		List<In> inlist = ins.inList(in);
+		HSSFSheet worksheet = workbook.createSheet("Java Books");;
+        HSSFRow row = null;
+        row = worksheet.createRow(0);
+		for(int i=1;i< inlist.size()+1;i++){
+			 row = worksheet.createRow(i);
+             row.createCell(0).setCellValue(inlist.get(i-1).getInNo());
+             row.createCell(1).setCellValue(inlist.get(i-1).getInDate());
+             row.createCell(2).setCellValue(inlist.get(i-1).getInSum());
+             row.createCell(3).setCellValue(inlist.get(i-1).getInCon());
+             row.createCell(4).setCellValue(inlist.get(i-1).getInEtc());
+		}
+		int goll = userid.getId().indexOf("@");
+		String excelName = userid.getId().substring(0,goll)+"_In";
+		model.addAttribute("inlist",inlist);
+		response.setContentType("Application/Msexcel");
+        response.setHeader("Content-Disposition", "ATTachment; Filename="+excelName+".xls");
+		return "inexcel";
+	}
 	
 }

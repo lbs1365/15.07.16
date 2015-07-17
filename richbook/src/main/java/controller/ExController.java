@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Ex;
@@ -10,8 +11,13 @@ import model.ExMet;
 
 
 
+import model.In;
+import model.InMet;
 import model.Member;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -170,4 +176,36 @@ public class ExController {
 		emts.emtDel(emtNo);
 		return "forward:EmtUpList.do";
 	}
+	
+	@SuppressWarnings("deprecation")
+	@RequestMapping(value="ExExcel")
+	public String ExExcel(Ex ex, Model model,HttpSession session, HSSFWorkbook workbook,HttpServletResponse response){
+		Member userid = (Member) session.getAttribute("userid");
+		ex.setMemNo(userid.getMemNo());
+		if(ex.getExListPrint()==null || ex.getExListPrint().equals("") || ex.getExListPrint().equals("All")){
+			ex.setExListPrintCal("null");
+		}else{
+			ex.setExListPrintCal(cs.exListPrintCal(ex.getExListPrint()));
+		}			
+		  // create a new Excel sheet
+		List<Ex> exlist = exs.exList(ex);
+		HSSFSheet worksheet = workbook.createSheet("Java Books");;
+        HSSFRow row = null;
+        row = worksheet.createRow(0);
+		for(int i=1;i< exlist.size()+1;i++){
+			 row = worksheet.createRow(i);
+             row.createCell(0).setCellValue(exlist.get(i-1).getExNo());
+             row.createCell(1).setCellValue(exlist.get(i-1).getExDate());
+             row.createCell(2).setCellValue(exlist.get(i-1).getExSum());
+             row.createCell(3).setCellValue(exlist.get(i-1).getExCon());
+             row.createCell(4).setCellValue(exlist.get(i-1).getExEtc());
+		}
+		int goll = userid.getId().indexOf("@");
+		String excelName = userid.getId().substring(0,goll)+"_Ex";
+		model.addAttribute("exlist",exlist);
+		response.setContentType("Application/Msexcel");
+        response.setHeader("Content-Disposition", "ATTachment; Filename="+excelName+".xls");
+		return "exexcel";
+	}
+	
 }
